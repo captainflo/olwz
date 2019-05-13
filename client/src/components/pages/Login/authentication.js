@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter, Link, Route, Router, Switch } from 'react-router-dom';
-import logo from '../../../logo.svg';
+import { withRouter} from 'react-router-dom';
 import '../../../App.css';
-import API from "../../../Utils/API"
+import './authentication.css';
 import LoginPromoter from './loginPromoter';
 import LoginUser from './loginUser';
 import Register from './register';
@@ -13,13 +12,9 @@ class Authentication extends Component {
   state = {
     email: "",
     password: "",
-    loggedInUser: false,
-    loggedInPromoter: false,
-    logingInUser: true,
-    logingInPromoter: false
-    
+    currentComponent: "loginUser",
   }
-
+  
 
   // function onclick log out
   logout=()=>{
@@ -30,25 +25,65 @@ class Authentication extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  logingInPromoter=(event)=>{
+    event.preventDefault();
+    this.setState({currentComponent: "loginPromoter"}); 
+  }
+
+  logingInUser=(event)=>{
+    event.preventDefault();
+    this.setState({currentComponent: "loginUser"}); 
+  }
+  registerUser=(event)=>{
+    event.preventDefault();
+    this.setState({currentComponent: "registerUser"}); 
+  }
+
+  registerPromoter=(event)=>{
+    event.preventDefault();
+    this.setState({currentComponent: "registerPromoter"}); 
+  }
+
+
+  display=()=>{
+    if(this.state.currentComponent === "loginUser"){
+      return <LoginUser registerUser={this.registerUser} onRegister={ this.props.onRegister } />
+    }
+    else if(this.state.currentComponent === "loginPromoter"){
+      return <LoginPromoter registerPromoter={this.registerPromoter}  onRegister={ this.props.onRegister }/>
+    }
+    else if(this.state.currentComponent === "registerUser"){
+      return <Register logingInUser={this.logingInUser} onRegister={ this.props.onRegister } />
+    }
+    else if(this.state.currentComponent === "registerPromoter"){
+      return <RegisterPromoter logingInPromoter={this.logingInPromoter} onRegister={this.props.onRegister} />
+    }
+  }
+  
+
   render() {
     return (
 
       <div>
-        <div className="App App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Owlz</h2>
+        <div className="jumbotron jumbotron-fluid jumbotron-auth slideRight">
+          <div className="container text-center">
+            <h1 className="display-4">Register / Login</h1>
+            <form className="form-inline">
+            <div className="form-row">
+                <button onClick={this.logingInPromoter} name="loginPromoter" type="button" className="btn-login">
+                Promoter <i class="fas fa-user-tie"></i> 
+            </button>
+            <button onClick={this.logingInUser} type="button" className="btn-login">
+              User <i class="fas fa-users"></i>  
+            </button>
+            </div>
+            </form>
+          </div>
         </div>
-  
         <div className="container">
-
-        <LoginPromoter/>
-        <LoginUser  onRegister={this.onRegister}/>
-        <Register/>
-        <RegisterPromoter/>
-        
+          {this.display()}
         </div>
       </div>
-
     );
   }
 }
