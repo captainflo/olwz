@@ -21,7 +21,7 @@ class Nav extends Component {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <p className="navbar-brand">
-        <Link onClick={this.props.onNavigation} to="/" className={window.location.pathname === "/"}>
+        <Link onClick={this.props.onNavigation} to="/">
         <img className="brand-logo" src={logo} alt={"logo"}/> 
         </Link>
       </p>
@@ -31,17 +31,17 @@ class Nav extends Component {
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
         {this.props.loggedIn&&<li className="nav-item">
-            <Link onClick={this.props.onNavigation} to={dashboardPath} className={window.location.pathname === "/" ? "nav-link" : "nav-link"}>
+            <Link onClick={this.props.onNavigation} to={dashboardPath} className="nav-link">
               Dashboard
             </Link>
           </li>}
           <li className="nav-item">
-            <Link onClick={this.props.onNavigation} to="/about" className={window.location.pathname === "/" ? "nav-link" : "nav-link"}>
+            <Link onClick={this.props.onNavigation} to="/about" className="nav-link">
               About us 
             </Link>
           </li>
           <li className="nav-item">
-            <Link onClick={this.props.onNavigation} to="/contact" className={window.location.pathname === "/" ? "nav-link" : "nav-link"}>
+            <Link onClick={this.props.onNavigation} to="/contact" className="nav-link">
               Contact us
             </Link>
           </li>
