@@ -19,22 +19,22 @@ export default class dashboardPromoter extends Component {
             console.log("Promoter data")
             console.log(data)
             const promoter = data.data;
-            this.setState({ promoter });
-        });
-        API.getMessageByPromoterId(id).then((data)=> {
-            console.log("Message data")
-            console.log(data)
-            const message = data.data;
-            this.setState({ message });
-        });
+            API.getMessageByPromoterId(id).then((data)=> {
+                this.setState({ message: data.data, promoter})
+            });
+        });   
     }
 
     messageConfirm=(id, confirm)=>{
-        confirm === true;
+        confirm = true;
         const newBody = {id: id, confirm: confirm }
         API.putMessageById(id, newBody).then((data)=> {
             console.log("Message confirm data ")
-            console.log(data)
+            const promoterId =this.props.match.params.id
+             API.getMessageByPromoterId(promoterId).then((data)=> {
+                console.log(data)
+                this.setState({ message: data.data})
+            });
         });
     }
 
@@ -43,7 +43,11 @@ export default class dashboardPromoter extends Component {
         const newBody = {id: id, confirm: confirm}
         API.putMessageById(id, newBody).then((data)=> {
             console.log("Message Delete data")
-            console.log(data)
+            const promoterId =this.props.match.params.id
+            API.getMessageByPromoterId(promoterId).then((data)=> {
+                console.log(data)
+                this.setState({ message: data.data})
+            });
         }); 
     }
 
