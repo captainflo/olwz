@@ -13,13 +13,20 @@ class ChatApp extends React.Component {
         messages: [],
         joinableRooms: [],
         joinedRooms: [],
-        hide: true,
+        hide: false,
+        currentUserId: this.props.email
     }
 
     componentDidMount() {
+
+        
+    }
+
+    componentDidUpdate(){
+
         const chatManager = new Chatkit.ChatManager({
             instanceLocator: 'v1:us1:22ea8e99-d0c0-4562-b5e8-847a27eaa8e2',
-            userId: this.props.email || 'client4',
+            userId: this.state.currentUserId || 'client4',
             tokenProvider: new Chatkit.TokenProvider({
                 url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/22ea8e99-d0c0-4562-b5e8-847a27eaa8e2/token'
             })
@@ -31,6 +38,7 @@ class ChatApp extends React.Component {
 
 
             }).catch(err => console.log('error on connecting: ', err))
+
     }
 
     getChats = () => {
@@ -72,15 +80,18 @@ class ChatApp extends React.Component {
         })
     }
 
-    /* createChat(parameter) {   //create new chat not done until implemented into app
+    createChat(parameter) {   //create new chat not done until implemented into app
+
+        console.log( 'logged in chat email' + this.state.currentUserId )
+        
         this.currentUser.createRoom({
-            name: parameter,
+            name: 'test' ,
             private: true,
-            addUserIds: ['user1', 'user2'],
+            addUserIds: [ this.state.currentUserId ],
         })
             .then(room => this.subscribeToChat(room.id)) // may not need this
             .catch(err => console.log('error with createRoom: ', err))
-    } */
+    } 
 
     //for creating a new user
     /* newUser = () => {

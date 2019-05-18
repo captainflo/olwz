@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import API from '../../../Utils/API';
 import './dashboard.css';
 import EditPromoter from './editPromoter';
-import Footer from '../../Footer/footer'
+import Footer from '../../Footer/footer';
+import Chatkit from '@pusher/chatkit-client'
 
 
 export default class dashboardPromoter extends Component {
@@ -25,8 +26,6 @@ export default class dashboardPromoter extends Component {
         });   
     }
 
-
-
     messageConfirm=(id, confirm)=>{
         confirm = true;
         const newBody = {id: id, confirm: confirm }
@@ -36,7 +35,9 @@ export default class dashboardPromoter extends Component {
              API.getMessageByPromoterId(promoterId).then((data)=> {
                 console.log(data)
                 this.setState({ message: data.data})
+                this.props.validated();
             });
+
         });
     }
 

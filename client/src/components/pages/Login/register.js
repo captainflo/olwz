@@ -32,6 +32,7 @@ class Register extends Component {
           this.setState({userId:user});
           this.props.onRegister(user);
           localStorage.setItem("user", user)
+          localStorage.setItem("emailUser", email);
           this.props.history.push(`/dashboard/${user}`);
         })
       })

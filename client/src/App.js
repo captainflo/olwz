@@ -14,7 +14,8 @@ class App extends Component {
   state = {
     loggedIn: localStorage.getItem("user") ? true : false || localStorage.getItem("promoter") ? true : false,
     logingIn: false,
-    loggedInEmail: '',
+    loggedInEmail: localStorage.getItem("emailUser"),
+    validated: false,
   }
 
   // User Login 
@@ -22,11 +23,19 @@ class App extends Component {
     this.setState({ loggedIn: true, logingIn: false });
   }
 
-  chatEmail = (email) => {
-    this.setState({ loggedInEmail: email })
+  setEmailState=(email)=>{
+    this.setState({loggedInEmail: email});
   }
 
+  //  Validated
+  validated=()=>{
+    this.setState({ validated: true });
+  }
+
+
   render() {
+    console.log(this.state.loggedInEmail);
+    console.log(this.props.email);
     return (
       <Router>
         <div>
@@ -36,16 +45,16 @@ class App extends Component {
               window.location.href = '/';
               localStorage.clear()
             }} />
-          {this.state.logingIn && <Authentication onRegister={this.onRegister} chatEmail={this.chatEmail} />}
+          {this.state.logingIn && <Authentication onRegister={this.onRegister} setEmailState={this.setEmailState}  />}
           {!this.state.logingIn && <Switch>
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route path="/listpromoter/:city" render={(props) => <Listpromoter {...props} loggedIn={this.state.loggedIn} />} />
             <Route exact path="/dashboard/:id" component={Dashboard} />
-            <Route exact path="/dashboard/promoter/:id" component={DashboardPromoter} />
+            <Route exact path="/dashboard/promoter/:id" render={(props) => <DashboardPromoter {...props} validated={this.validated} />} />
             <Route component={Home} />
           </Switch>}
-          {this.state.loggedIn && <ChatApp email={this.state.loggedInEmail} />}
+          {this.state.validated && this.state.loggedIn &&<ChatApp email={this.state.loggedInEmail} />}
         </div>
       </Router>
     );

@@ -21,15 +21,18 @@ class LoginUser extends Component {
     }
     else {
       const { email, password } = this.state;
+      this.props.setEmailState(email);
       const registerBody = { email, password };
       this.setState({ waitingForServer: true }, () => {
         API.loginUser(registerBody)
           .then((data) => {
             console.log(data);
             const user = data.data.id;
+            const email = data.data.email;
             this.setState({ userId: user });
             this.props.onRegister(user);
-            localStorage.setItem("user", user)
+            localStorage.setItem("user", user);
+            localStorage.setItem("emailUser", email);
             this.props.history.push(`/dashboard/${user}`);
           })
       })

@@ -16,8 +16,7 @@ class Authentication extends Component {
     password: "",
     currentComponent: "loginUser",
   }
-
-
+  
   // function onclick log out
   logout = () => {
     this.setState({ waitingForServer: false })
@@ -46,30 +45,25 @@ class Authentication extends Component {
     this.setState({ currentComponent: "registerPromoter" });
   }
 
-  chatEmail = () => {
-    this.props.chatEmail(this.state.email)
-  }
-
 
   display = () => {
     if (this.state.currentComponent === "loginUser") {
-      return <LoginUser registerUser={this.registerUser} onRegister={this.props.onRegister} />
+      return <LoginUser registerUser={this.registerUser} onRegister={this.props.onRegister} setEmailState={this.props.setEmailState}/>
     }
     else if (this.state.currentComponent === "loginPromoter") {
-      return <LoginPromoter registerPromoter={this.registerPromoter} onRegister={this.props.onRegister} />
+      return <LoginPromoter registerPromoter={this.registerPromoter} onRegister={this.props.onRegister} setEmailState={this.props.setEmailState}/>
     }
     else if (this.state.currentComponent === "registerUser") {
-      return <Register logingInUser={this.logingInUser} onRegister={this.props.onRegister} />
+      return <Register logingInUser={this.logingInUser} onRegister={this.props.onRegister} setEmailState={this.props.setEmailState}/>
     }
     else if (this.state.currentComponent === "registerPromoter") {
-      return <RegisterPromoter logingInPromoter={this.logingInPromoter} onRegister={this.props.onRegister} />
+      return <RegisterPromoter logingInPromoter={this.logingInPromoter} onRegister={this.props.onRegister} setEmailState={this.props.setEmailState}/>
     }
   }
 
 
   render() {
     return (
-
       <div>
         <div className="jumbotron jumbotron-fluid jumbotron-auth slideRight">
           <div className="container text-center">

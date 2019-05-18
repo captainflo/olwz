@@ -37,6 +37,7 @@ class Registerpromoter extends Component {
           this.setState({promoterId:promoter});
           this.props.onRegister(promoter);
           localStorage.setItem("promoter", promoter)
+          localStorage.setItem("emailUser", email);
           this.props.history.push(`/dashboard/promoter/${promoter}`);
         })
       })
