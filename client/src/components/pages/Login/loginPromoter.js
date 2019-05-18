@@ -33,7 +33,7 @@ class LoginPromoter extends Component {
             const promoter = data.data.id;
             this.setState({promoterId:promoter});
             this.props.onRegister(promoter);
-            localStorage.setItem("promoter", promoter)
+            localStorage.setItem("promoter", promoter);
             this.props.history.push(`/dashboard/promoter/${promoter}`);
           })
         })

@@ -12,7 +12,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 class App extends Component {
   state ={
     loggedIn: localStorage.getItem("user")? true: false || localStorage.getItem("promoter")? true: false,
-    logingIn:false
+    logingIn:false,
+    navbarPromoterId: localStorage.getItem("promoter")
   }
 
   // User Login 
@@ -20,21 +21,27 @@ class App extends Component {
     this.setState({loggedIn: true, logingIn: false});
   }
   
+
+
   render() {
+    console.log("state navbar promoter")
+    console.log(this.state.navbarPromoterId)
     return (
       <Router>
       <div>
           <Nav onNavigation={()=> this.setState({logingIn: false})} loggedIn={this.state.loggedIn} onLogin={()=> this.setState({logingIn: true})} 
            onLogout={()=>{ this.setState({loggedIn: false})
+           localStorage.clear()
            window.location.href = '/';
-           localStorage.clear()}}/>
+          }}
+           />
           {this.state.logingIn && <Authentication onRegister={this.onRegister} />}
           {!this.state.logingIn &&<Switch>
             <Route exact path="/about" component={About} />
             <Route exact path="/contact" component={Contact} />
             <Route path="/listpromoter/:city" render={(props) => <Listpromoter {...props} loggedIn={this.state.loggedIn} />}/>     
             <Route exact path="/dashboard/:id" component={Dashboard} />
-            <Route exact path="/dashboard/promoter/:id" component={DashboardPromoter} />
+            <Route exact path="/dashboard/promoter/:id" render={(props) => <DashboardPromoter {...props} navbarPromoterId={this.state.loggedIn} />} />
             <Route component={Home} />
           </Switch>}
       </div>

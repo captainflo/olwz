@@ -30,7 +30,7 @@ export default class dashboardPromoter extends Component {
         const newBody = {id: id, confirm: confirm }
         API.putMessageById(id, newBody).then((data)=> {
             console.log("Message confirm data ")
-            const promoterId =this.props.match.params.id
+            const promoterId =this.props.match.params.id;
              API.getMessageByPromoterId(promoterId).then((data)=> {
                 console.log(data)
                 this.setState({ message: data.data})
@@ -57,7 +57,6 @@ export default class dashboardPromoter extends Component {
 
       messages = () => {
         let Message = []
-    
         for (let i = 0; i < this.state.message.length; i++) {
             // const start = moment(this.state.message[i].start_date).format("LL");
             // const end = moment(this.state.message[i].end_date).format("LL");
@@ -72,7 +71,6 @@ export default class dashboardPromoter extends Component {
                     <h4>Occassion <i className="fas fa-gift"></i> : <span className="text-message">{this.state.message[i].occasion}</span></h4>
                     <h4>Message <i className="fas fa-comments"></i> : <span className="text-message">{this.state.message[i].message}</span></h4>
                 </div>
-               
             )
         }
         return Message

@@ -16,7 +16,6 @@ class Authentication extends Component {
     password: "",
     currentComponent: "loginUser",
   }
-  
 
   // function onclick log out
   logout=()=>{
@@ -34,7 +33,7 @@ class Authentication extends Component {
 
   logingInUser=(event)=>{
     event.preventDefault();
-    this.setState({currentComponent: "loginUser"}); 
+    this.setState({currentComponent: "loginUser"});
   }
   registerUser=(event)=>{
     event.preventDefault();
