@@ -7,10 +7,17 @@ import './nav.css';
 class Nav extends Component {
 
   state={
-    user:  parseInt(localStorage.getItem("user"))
+    user:  parseInt(localStorage.getItem("user")),
+    promoter:  parseInt(localStorage.getItem("promoter"))
   }
 
   render(){ 
+    let dashboardPath = "";
+    if(this.state.user){
+      dashboardPath = `/dashboard/${this.state.user}`
+    } else{
+      dashboardPath = `/dashboard/promoter/${this.state.promoter}`
+    }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <p className="navbar-brand">
@@ -24,7 +31,7 @@ class Nav extends Component {
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
         {this.props.loggedIn&&<li className="nav-item">
-            <Link onClick={this.props.onNavigation} to={"/dashboard/"+this.state.user} className={window.location.pathname === "/" ? "nav-link" : "nav-link"}>
+            <Link onClick={this.props.onNavigation} to={dashboardPath} className={window.location.pathname === "/" ? "nav-link" : "nav-link"}>
               Dashboard
             </Link>
           </li>}
