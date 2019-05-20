@@ -18,10 +18,11 @@ class ChatApp extends React.Component {
 
     componentDidMount() {
         const chatManager = new Chatkit.ChatManager({
-            instanceLocator: 'v1:us1:22ea8e99-d0c0-4562-b5e8-847a27eaa8e2',
+            instanceLocator:'v1:us1:a4e9e9d7-5fc4-447d-b3d7-7c10dbfdffef', //'v1:us1:22ea8e99-d0c0-4562-b5e8-847a27eaa8e2'*/
             userId: this.props.emailPromoter || 'client4',
             tokenProvider: new Chatkit.TokenProvider({
-                url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/22ea8e99-d0c0-4562-b5e8-847a27eaa8e2/token'
+                 url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/a4e9e9d7-5fc4-447d-b3d7-7c10dbfdffef/token'
+                 //'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/22ea8e99-d0c0-4562-b5e8-847a27eaa8e2/token'*/
             })
         })
         chatManager.connect()
