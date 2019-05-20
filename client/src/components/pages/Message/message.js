@@ -21,17 +21,14 @@ class Message extends Component {
     event.preventDefault();
     if(this.state.start_date === "" || this.state.end_date === "" || this.state.guests === ""||this.state.message ===""){     
       alert("Invalid Credentials");
-      console.log(this.state);
     }
     else {
       const {PromoterId,UserId,start_date, end_date, guests, occasion, message} = this.state;
       guests = parseInt(guests);
       const registerBody = {PromoterId,UserId, start_date, end_date, guests, occasion, message};
-      console.log(registerBody);
       this.setState({waitingForServer:true},()=>{
         API.createMessage(registerBody)
         .then((data)=>{
-          console.log(data);
         })
       })
     }
@@ -46,15 +43,15 @@ class Message extends Component {
       <div>
           <form className=" slideUp">
             <div className="form-group">
-              <label for="exampleInputStartDate">Start Date</label>
+              <label htmlFor="exampleInputStartDate">Start Date</label>
               <input disabled={this.state.waitingForServer} onChange={this.handleType} name="start_date" type="date" className="form-control" id="exampleInputStartDate"  placeholder=""/>
             </div>
             <div className="form-group">
-              <label for="exampleInputEndDate">Start End</label>
+              <label htmlFor="exampleInputEndDate">Start End</label>
               <input disabled={this.state.waitingForServer} onChange={this.handleType} name="end_date" type="date" className="form-control" id="exampleInputEndDate"  placeholder=""/>
             </div>
             <div className="form-group">
-              <label for="InputGuests">Guest</label>
+              <label htmlFor="InputGuests">Guest</label>
               <select disabled={this.state.waitingForServer} onChange={this.handleType} name="guests" type="text" className="form-control" id="InputGuests">
                 <option value="" default>Number of Guests</option>
                 <option value="1">1</option>
@@ -70,16 +67,16 @@ class Message extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label for="exampleInputOccasion">Occasion</label>
+              <label htmlFor="exampleInputOccasion">Occasion</label>
               <input disabled={this.state.waitingForServer} onChange={this.handleType} name="occasion" type="text" className="form-control" id="exampleInputOccasion"  placeholder="Birthday"/>
             </div>
             <div className="form-group">
-              <label for="exampleInputMessage">Message</label>
+              <label htmlFor="exampleInputMessage">Message</label>
               <textarea disabled={this.state.waitingForServer} onChange={this.handleType} name="message" type="text" className="form-control" id="exampleInputMessage"  placeholder="Hello we want yacht for tonight..."/>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn-login" data-dismiss="modal">Close</button>
-            <button disabled={this.state.waitingForServer} onClick={this.createMessage} type="submit" className="btn-login">Submit</button>
+            <div className="modal-footer">
+            <button type="button" className="btn-login" data-dismiss="modal">Close</button>
+            <button disabled={this.state.waitingForServer} onClick={this.createMessage} type="submit" data-dismiss="modal" className="btn-login">Submit</button>
             </div>
           </form>
       </div>

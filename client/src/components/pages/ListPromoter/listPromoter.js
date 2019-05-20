@@ -55,17 +55,17 @@ class Listpromoter extends Component {
                   <hr className="line-hr"></hr>
                   <p>{this.state.promoters[i].descriptions}.</p>
                   <div className="float-right">
-                    {!this.props.loggedIn&&<Link to="/" className="btn-login log-contact">Login In <i className="fas fa-user"></i></Link>}
+                    {!this.props.loggedIn&&<Link to="/" className="btn-login log-contact">First be login in <i className="fas fa-user"></i></Link>}
                     {this.props.loggedIn&&<button type="button" className="btn-login" data-toggle="modal" data-target={htmlid}>Contact <i className="fas fa-file-signature"></i></button>}
 
 
-                    <div class="modal fade" id={selector} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">Message to {this.state.promoters[i].handle}</h3>
+                    <div className="modal fade" id={selector} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h3 className="modal-title" id="exampleModalLabel">Message to {this.state.promoters[i].handle}</h3>
                           </div>
-                          <div class="modal-body">
+                          <div className="modal-body">
                             <Message idPromoter={id}/>
                           </div>
                         </div>
